@@ -7,6 +7,7 @@
     <groupId>com.theme-joo</groupId>
     <artifactId>theme-joo</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -93,5 +94,17 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>target/frontend</directory>
+                <targetPath>static</targetPath>
+            </resource>
+        </resources>
     </build>
+
+    <modules>
+        <module>frontend</module>
+        <module>backend</module>
+    </modules>
 </project>
