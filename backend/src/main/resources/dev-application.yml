@@ -1,0 +1,9 @@
+---
+spring:
+  profiles: prd-db
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://betterfly-sql.creacra6qvrv.ap-northeast-2.rds.amazonaws.com:3306/themejoo_dev?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
+      username: betterfly
+      password: betterfly
