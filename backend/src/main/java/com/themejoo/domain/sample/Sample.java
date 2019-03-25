@@ -1,5 +1,6 @@
 package com.themejoo.domain.sample;
 
+import com.themejoo.common.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Sample {
+public class Sample extends BaseTimeEntity {
     @Id
     @GeneratedValue
     private Long id;
