@@ -5,6 +5,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+
+google.api.key: AIzaSyDUMqZG13_zlY4_hWtnpVMDvreik-GCUEw
 
 # local H2 환경
 ---
