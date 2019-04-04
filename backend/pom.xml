@@ -76,22 +76,35 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.apis</groupId>
-            <artifactId>google-api-services-docs</artifactId>
-            <version>v1-rev10-1.25.0</version>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.25.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>1.25.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-sheets</artifactId>
+            <version>v4-rev546-1.25.0</version>
+        </dependency>
+
     </dependencies>
 
 
     <build>
         <resources>
             <resource>
-                <directory>backend/src/main/resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <testResources>
             <testResource>
-                <directory>backend/src/test/resources/</directory>
+                <directory>src/test/resources/</directory>
             </testResource>
         </testResources>
 
