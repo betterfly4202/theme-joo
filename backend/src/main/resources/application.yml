@@ -5,8 +5,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
 
-# local 환경
+google.api.key: AIzaSyDUMqZG13_zlY4_hWtnpVMDvreik-GCUEw
+
+# local H2 환경
 ---
 spring:
   profiles: local
@@ -20,7 +23,7 @@ spring:
     console:
       enabled: true
 
-# 운영 환경
+# dev 개발 환경
 ---
 spring.profiles: dev
 spring:
@@ -34,6 +37,7 @@ spring:
 server:
   port: 8081
 
+# prd 배포 환경
 ---
 spring.profiles: prd
 spring.profiles.include: prd-db
