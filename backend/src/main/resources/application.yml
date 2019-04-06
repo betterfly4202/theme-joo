@@ -7,7 +7,11 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
 
-google.api.key: AIzaSyDUMqZG13_zlY4_hWtnpVMDvreik-GCUEw
+
+spring.security.oauth2.client.preEstablishedRedirectUri=http://localhost:9090/callback
+spring.security.oauth2.client.useCurrentUri=false
+
+google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
 # local H2 환경
 ---
