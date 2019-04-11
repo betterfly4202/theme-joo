@@ -1,3 +1,7 @@
-<p>
-  theme-list works!
-</p>
+<div>
+  <mat-grid-list cols="3" rowheight="300px">
+    <mat-grid-tile *ngFor="let theme of themes" [colspan]="1" [rowspan]="1">
+      <theme-list-item [theme]="theme"></theme-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

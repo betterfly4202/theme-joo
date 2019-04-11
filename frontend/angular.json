@@ -28,6 +28,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "./node_modules/chartist/dist/chartist.css",
               "src/styles.scss"
             ],
             "scripts": [],
