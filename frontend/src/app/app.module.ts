@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {Global} from './app.global.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatTool
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+    Global
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
