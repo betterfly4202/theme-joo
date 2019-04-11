@@ -34,6 +34,8 @@ export class LineChartComponent implements OnInit {
     axisX: {
       showGrid: false
     },
+    showPoint: false,
+    lineSmooth: false,
     height: 300
   };
 

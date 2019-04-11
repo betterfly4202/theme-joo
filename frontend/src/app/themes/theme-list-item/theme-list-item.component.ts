@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ITheme} from '../themes.model';
 
 @Component({
   selector: 'theme-list-item',
@@ -7,7 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ThemeListItemComponent implements OnInit {
 
-  @Input() theme: IThemes;
+  @Input() theme: ITheme;
+  @Input() width: number;
 
   constructor() { }
 
