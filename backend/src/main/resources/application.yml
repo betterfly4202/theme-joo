@@ -7,25 +7,24 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
 
-
-spring.security.oauth2.client.preEstablishedRedirectUri=http://localhost:9090/callback
-spring.security.oauth2.client.useCurrentUri=false
-
+google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
 google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
 # local H2 환경
 ---
 spring:
   profiles: local
-  datasource:
-    data: classpath:data-h2.sql # 시작할때 실행시킬 script
+#  datasource:
+#    data: classpath:data-h2.sql # 시작할때 실행시킬 script
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create-drop
   h2:
     console:
       enabled: true
+
+google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
+
+google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
 # dev 개발 환경
 ---

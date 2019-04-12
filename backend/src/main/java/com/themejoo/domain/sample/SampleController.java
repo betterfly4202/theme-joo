@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
 
     private SampleRepository sampleRepository;
-
     @PostMapping("/sample/save")
     public void saveSample(@RequestBody SampleSaveRequestDto dto){
         sampleRepository.save(dto.toEntity());

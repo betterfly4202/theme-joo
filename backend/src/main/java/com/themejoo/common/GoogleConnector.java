@@ -5,7 +5,9 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -13,6 +15,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.auth.oauth2.GoogleCredentials;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -31,28 +34,38 @@ import java.util.List;
 @Slf4j
 @Component
 public class GoogleConnector {
-    private static final String APPLICATION_NAME = "THEME-JOO.COM";
-    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
+    private final String APPLICATION_NAME = "THEME-JOO.COM";
+    private final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private final String TOKENS_DIRECTORY_PATH = "tokens";
 
-    private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
-    private static final String CREDENTIALS_FILE_PATH = "/themejoo-66ab77b76266.json";
+    private final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
+//    private final String CREDENTIALS_FILE_PATH = "/themejoo-1354e17e8d8c.json";
+    private final String CREDENTIALS_FILE_PATH = "/client_secret.json";
 
 
-    private static Credential getCredential(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+    private Credential getCredential(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")
                 .build();
+
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
-
     }
 
-    public Sheets getSheetsService() throws IOException{
+    private GoogleCredentials getCredential() throws IOException {
+        InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        GoogleCredentials credentials = GoogleCredentials.fromStream(in);
+        credentials.refreshAccessToken();
+
+        return credentials;
+    }
+
+    public Sheets getSheetsService() {
         Sheets service = null;
         try {
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -60,6 +73,8 @@ public class GoogleConnector {
                     .setApplicationName(APPLICATION_NAME)
                     .build();
         }catch (GeneralSecurityException ge){
+            log.info(ge.getMessage());
+        }catch (IOException io){
             log.info("can not make spread sheet.");
         }
         return service;
