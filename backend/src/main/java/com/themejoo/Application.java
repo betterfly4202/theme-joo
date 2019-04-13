@@ -7,6 +7,7 @@ import com.themejoo.domain.sheets.SpreadSheetMaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.xml.bind.SchemaOutputResolver;
@@ -20,7 +21,12 @@ import java.io.IOException;
 @SpringBootApplication
 @Slf4j
 public class Application {
+
+    private static final String PROPERTIES = "spring.config.location=classpath:/client_secret.yml";
+
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        new SpringApplicationBuilder(Application.class)
+                .properties(PROPERTIES)
+                .run(args);
     }
 }

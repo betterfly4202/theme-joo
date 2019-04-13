@@ -39,14 +39,12 @@ public class GoogleConnector {
     private final String TOKENS_DIRECTORY_PATH = "tokens";
 
     private final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
-//    private final String CREDENTIALS_FILE_PATH = "/themejoo-1354e17e8d8c.json";
     private final String CREDENTIALS_FILE_PATH = "/client_secret.json";
 
 
     private Credential getCredential(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
-
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
