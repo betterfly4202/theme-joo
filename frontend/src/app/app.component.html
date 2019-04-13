@@ -9,14 +9,21 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" [ngStyle]="{'min-width.px':getToolbarWidth()}">
-      <mat-toolbar-row>
-        <button type="button" mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-        <h1>테마주닷컴</h1>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
+    <header>
+      <mat-toolbar [ngStyle]="{'min-width.px':getToolbarWidth()}">
+        <mat-toolbar-row>
+          <button class="x2" type="button" mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <h1>테마주닷컴</h1>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </header>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+    <footer [ngStyle]="{'min-width.px':getToolbarWidth()}">
+      Footer
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

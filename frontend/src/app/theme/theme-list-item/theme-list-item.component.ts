@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ITheme} from '../themes.model';
+import {ITheme} from '../theme.model';
+import {Global} from '../../app.global.service';
 
 @Component({
   selector: 'theme-list-item',
@@ -9,9 +10,11 @@ import {ITheme} from '../themes.model';
 export class ThemeListItemComponent implements OnInit {
 
   @Input() theme: ITheme;
-  @Input() width: number;
+  width: number;
 
-  constructor() { }
+  constructor() {
+    this.width = Global.CARD_WIDTH;
+  }
 
   ngOnInit() {
   }

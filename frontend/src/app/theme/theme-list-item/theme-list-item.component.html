@@ -1,0 +1,16 @@
+<mat-card class="theme-card" [ngStyle]="{'width.px':width-(16*2), 'height.px':width-(16*2)}">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar" [ngStyle]="{'background-image':'url(' + theme.imageUrl + ')'}"></div>
+    <mat-card-title>{{theme.title}}</mat-card-title>
+    <mat-card-subtitle>{{theme.subTitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <line-chart [chartData]="theme.data"></line-chart>
+  <mat-card-content>
+    <p>
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button></button>
+    <button mat-button></button>
+  </mat-card-actions>
+</mat-card>

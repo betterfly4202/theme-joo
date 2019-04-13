@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ChartEvent, ChartType} from 'ng-chartist';
-import {IBarChartOptions, IChartistAnimationOptions, IChartistData} from 'chartist';
+import {IChartistAnimationOptions, IChartistData, ILineChartOptions} from 'chartist';
 
 @Component({
   selector: 'line-chart',
@@ -9,48 +9,37 @@ import {IBarChartOptions, IChartistAnimationOptions, IChartistData} from 'charti
 })
 export class LineChartComponent implements OnInit {
 
+  @Input() chartData: number[];
+
+  loading: boolean = true;
+
   type: ChartType = 'Line';
-  data: IChartistData = {
-    labels: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ],
-    series: [
-      [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-      [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
-    ]
-  };
-  options: IBarChartOptions = {
+  data: IChartistData;
+  options: ILineChartOptions = {
     axisX: {
-      showGrid: false
+      showGrid: false,
+      showLabel: false
+    },
+    axisY: {
+      showGrid: false,
+      showLabel: false
     },
     showPoint: false,
-    lineSmooth: false,
+    showArea: false,
+    fullWidth: true,
     height: 300
   };
 
   events: ChartEvent = {
     draw: (data) => {
-      if (data.type === 'Line') {
-        data.element.animate({
-                               y2: {
-                                 dur: '0.5s',
-                                 from: data.y1,
-                                 to: data.y2,
-                                 easing: 'easeOutQuad'
-                               } as IChartistAnimationOptions
-        });
-      }
+      data.element.animate({
+        y2: {
+          dur: '1s',
+          from: data.y1,
+          to: data.y2,
+          easing: 'easeOutQuad'
+        } as IChartistAnimationOptions
+      });
     }
   };
 
@@ -59,6 +48,10 @@ export class LineChartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.data = {
+      series: [this.chartData]
+    };
+    this.loading = false;
   }
 
 }

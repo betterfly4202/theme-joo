@@ -1,5 +1,6 @@
 <div>
   <x-chartist
+    *ngIf="!loading"
     [type]="type"
     [data]="data"
     [options]="options"
