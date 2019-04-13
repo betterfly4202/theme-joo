@@ -3,12 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'themes',
-    loadChildren: './themes/themes.module#ThemesModule'
+    path: 'theme',
+    loadChildren: './theme/theme.module#ThemeModule'
   },
   {
     path: '',
-    redirectTo: 'themes',
+    redirectTo: 'theme',
     pathMatch: 'full'
   }
 ];
