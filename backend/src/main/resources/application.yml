@@ -10,11 +10,6 @@ spring:
 google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
 google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
-# local H2 환경
-security:
-  basic:
-    enabled: false
-
 ---
 spring:
   profiles: local
@@ -25,10 +20,6 @@ spring:
   h2:
     console:
       enabled: true
-
-google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
-
-google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
 # dev 개발 환경
 ---

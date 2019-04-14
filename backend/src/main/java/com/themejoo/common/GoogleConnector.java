@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -55,10 +56,10 @@ public class GoogleConnector {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    private GoogleCredentials getCredential() throws IOException {
+    public GoogleCredential getCredential() throws IOException {
         InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        GoogleCredentials credentials = GoogleCredentials.fromStream(in);
-        credentials.refreshAccessToken();
+        GoogleCredential credentials = GoogleCredential.fromStream(in);
+        credentials.refreshToken();
 
         return credentials;
     }

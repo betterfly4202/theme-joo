@@ -48,7 +48,6 @@ public class SpreadSheetMaker {
         Sheets service = googleConnector.getSheetsService();
         String sheetId = "1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A";
         System.out.println(sheetId);
-        makeSpreadSheet("ttttt");
         ValueRange sheetValues = service.spreadsheets().values().get(sheetId, range).execute();
 
         return sheetValues;
