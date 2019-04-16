@@ -52,7 +52,7 @@ public class GoogleConnector {
                 .setAccessType("offline")
                 .build();
 
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8822).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
