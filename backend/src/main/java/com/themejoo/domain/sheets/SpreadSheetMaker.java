@@ -23,8 +23,8 @@ public class SpreadSheetMaker {
     @Autowired
     private GoogleConnector googleConnector;
 
-    @Value("${google.sheet.id}")
-    private String sheetId;
+//    @Value("${google.sheet.id}")
+//    private String sheetId;
 
     public SpreadSheetMaker() {
         googleConnector = new GoogleConnector();
@@ -46,6 +46,7 @@ public class SpreadSheetMaker {
 
     public ValueRange readSheets(String range) throws IOException {
         Sheets service = googleConnector.getSheetsService();
+        String sheetId = "1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A";
         ValueRange sheetValues = service.spreadsheets().values().get(sheetId, range).execute();
 
         return sheetValues;
