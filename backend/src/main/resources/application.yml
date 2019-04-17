@@ -10,6 +10,10 @@ spring:
 google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
 google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
+server:
+  servlet:
+    context-path: /api
+
 ---
 spring:
   profiles: local
@@ -28,7 +32,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbc-url: jdbc:mysql://betterfly-sql.creacra6qvrv.ap-northeast-2.rds.amazonaws.com:3306/themejoo_dev?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://themejoo-webservice.creacra6qvrv.ap-northeast-2.rds.amazonaws.com:3306/themejoo_dev?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
       username: betterfly
       password: betterfly
 
