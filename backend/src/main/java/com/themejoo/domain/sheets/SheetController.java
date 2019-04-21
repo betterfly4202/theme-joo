@@ -3,6 +3,7 @@ package com.themejoo.domain.sheets;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class SheetController {
     private SpreadSheetMaker sheetMaker;
 

@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @RestController
-@RequestMapping("/batch")
+@RequestMapping("/api/batch")
 @Slf4j
 public class StockCrawlingController {
     @Autowired
