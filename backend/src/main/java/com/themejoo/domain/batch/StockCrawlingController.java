@@ -1,10 +1,13 @@
 package com.themejoo.domain.batch;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,30 +24,27 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/batch")
 @Slf4j
 public class StockCrawlingController {
+    @Autowired
+    private StockMarketCommand stockMarketCommand;
 
-    @GetMapping("/crawling/stockMkt")
+    @Autowired
+    private KosdaqMarketCommand kosdaqMarketCommand;
+
+    @Autowired
+    private KonexMarketCommand konexMarketCommand;
+
+    @GetMapping("/stockMkt")
     public void getStockList(){
+        stockMarketCommand.execute();
+    }
 
-        RestTemplate restTemplate = new RestTemplate();
-        String baseUrl = "https://kind.krx.co.kr/corpgeneral/corpList.do";
+    @GetMapping("/kosdaqMkt")
+    public void getKosdaqList(){
+        kosdaqMarketCommand.execute();
+    }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
-        map.add("method", "download");
-        map.add("marketType", "stockMkt");
-        map.add("pageIndex", "1");
-        map.add("orderMode", "3");
-        map.add("orderStat", "D");
-        map.add("searchType", "13");
-        map.add("fiscalYearEnd", "all");
-        map.add("location", "all");
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(baseUrl, request , String.class);
-        String responseBody = response.getBody();
-
-        log.info("responseBody : {}", responseBody);
+    @GetMapping("/konexMkt")
+    public void getKonexList(){
+        konexMarketCommand.execute();
     }
 }

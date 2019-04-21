@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Date : 2019.04.17
  */
 
-@Service
-public class StockCrawlingService {
-
-
+public interface Command {
+    void execute();
 }

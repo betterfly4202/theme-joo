@@ -16,7 +16,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
@@ -91,13 +90,13 @@ public class StockCrawlingControllerTest {
         Element element = doc.body();
 
         List<Element> thList = element.getElementsByTag("tr").tagName("td");
-        StockInfoVO stockInfoVO = new StockInfoVO();
+        StockInfo stockInfoVO = new StockInfo();
         thList.stream()
                 .map(m -> m.getElementsByTag("td").eachText())
                 .forEach(v ->{
                     if(v.size()== 10){
                         stockInfoVO.setCompany(v.get(1));
-                        stockInfoVO.setStockCode(v.get(2));
+                        stockInfoVO.setStockCode(Integer.parseInt(v.get(2)));
                         stockInfoVO.setBusinessType(v.get(3));
                         stockInfoVO.setMainProduct(v.get(4));
                         stockInfoVO.setListedDate(v.get(5));
@@ -113,7 +112,7 @@ public class StockCrawlingControllerTest {
     private MultiValueMap<String, String> stockMktMap(){
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("method", "download");
-        map.add("marketType", "stockMkt");
+        map.add("marketType", "kosdaqMkt");
         map.add("pageIndex", "1");
         map.add("orderMode", "3");
         map.add("orderStat", "D");
