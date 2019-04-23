@@ -4,6 +4,8 @@ import com.themejoo.common.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by betterfly
@@ -30,6 +32,9 @@ public class StockInfo extends BaseTimeEntity {
     private String president;
     private String homepage;
     private String area;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stockInfo", cascade = CascadeType.PERSIST)
+//    private List<StockInfo> stockInfoList = new ArrayList<>();
 
     @Builder
     public StockInfo(int stockSeq, String company, int stockCode, String businessType, String mainProduct,

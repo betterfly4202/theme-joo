@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
@@ -17,14 +18,14 @@ import java.io.IOException;
  */
 
 @Slf4j
-@Component
+@Service
 public class SpreadSheetMaker {
 
     @Autowired
     private GoogleConnector googleConnector;
 
-//    @Value("${google.sheet.id}")
-//    private String sheetId;
+    @Value("${google.sheet.id}")
+    private String sheetId;
 
     public SpreadSheetMaker() {
         googleConnector = new GoogleConnector();
@@ -46,7 +47,6 @@ public class SpreadSheetMaker {
 
     public ValueRange readSheets(String range) throws IOException {
         Sheets service = googleConnector.getSheetsService();
-        String sheetId = "1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A";
         ValueRange sheetValues = service.spreadsheets().values().get(sheetId, range).execute();
 
         return sheetValues;

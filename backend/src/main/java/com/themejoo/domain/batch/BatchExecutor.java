@@ -11,7 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -58,7 +57,6 @@ public class BatchExecutor {
                 .stream()
                 .map(m -> m.getElementsByTag("td").eachText())
                 .forEach(v ->{
-                    StockInfo stockInfo = new StockInfo();
                     if(v.size()== 10){
                         if(v.iterator().hasNext()) {
                             stockInfoRepository.save(StockInfo.builder()
@@ -79,7 +77,7 @@ public class BatchExecutor {
     }
 
     private List<Element> getStockElementList(){
-        MultiValueMap<String, String> map = stockFormParameter();
+        MultiValueMap<String, String> map = setStockFormParameter();
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(baseUrl, request , String.class);
         Document doc = Jsoup.parse(response.getBody());
@@ -87,7 +85,7 @@ public class BatchExecutor {
         return doc.body().getElementsByTag("tr").tagName("td");
     }
 
-    private MultiValueMap<String, String> stockFormParameter(){
+    private MultiValueMap<String, String> setStockFormParameter(){
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("method", "download");
         map.add("marketType", marketType.getStockName());
