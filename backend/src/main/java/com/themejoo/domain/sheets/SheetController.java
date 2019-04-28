@@ -1,10 +1,10 @@
 package com.themejoo.domain.sheets;
 
 import com.google.api.services.sheets.v4.model.ValueRange;
-import com.themejoo.domain.batch.StockInfo;
+import com.themejoo.domain.stockinfo.StockInfo;
+import com.themejoo.domain.stockinfo.StockInfoRepositoryImpl;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +22,10 @@ import java.util.List;
 @RequestMapping("/api")
 @Api(value = "v1/sheet", description = "sheet api")
 public class SheetController {
-    private SpreadSheetMaker sheetMaker;
-
+    private SheetServiceImpl sheetMaker;
 
     @Autowired
-    private SheetServiceImpl sheetService;
+    private StockInfoRepositoryImpl stockInfoService;
 
     @GetMapping("/sheet")
     public void getSheet(){
@@ -42,6 +41,6 @@ public class SheetController {
     public List<StockInfo> getStockListFromSeq(
             @RequestParam Integer stockSeq){
 
-        return sheetService.findByStockInfoSeq(stockSeq);
+        return stockInfoService.findByStockInfoSeq(stockSeq);
     }
 }

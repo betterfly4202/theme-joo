@@ -1,5 +1,6 @@
 package com.themejoo.domain.batch;
 
+import com.themejoo.domain.stockinfo.StockInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class KonexMarketCommand implements Command {
     @Autowired
-    private BatchExecutor batchExecutor;
+    private StockBatchExecutor stockBatchExecutor;
 
     @Override
     public void execute() {
-        batchExecutor.executeStockMarket(MarketType.KONEX_MARKET);
+        stockBatchExecutor.executeStockMarket(MarketType.KONEX_MARKET);
     }
 }

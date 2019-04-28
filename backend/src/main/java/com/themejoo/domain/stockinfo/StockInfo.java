@@ -1,22 +1,20 @@
-package com.themejoo.domain.batch;
+package com.themejoo.domain.stockinfo;
 
 import com.themejoo.common.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by betterfly
- * Date : 2019.04.20
+ * Date : 2019.04.24
  */
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 @Entity
-@Table(name = "tb_stock_info")
 @Data
+@Table(name = "tb_stock_info")
 public class StockInfo extends BaseTimeEntity {
     @Id
     @GeneratedValue
@@ -32,9 +30,6 @@ public class StockInfo extends BaseTimeEntity {
     private String president;
     private String homepage;
     private String area;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stockInfo", cascade = CascadeType.PERSIST)
-//    private List<StockInfo> stockInfoList = new ArrayList<>();
 
     @Builder
     public StockInfo(int stockSeq, String company, int stockCode, String businessType, String mainProduct,
