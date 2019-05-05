@@ -1,12 +1,10 @@
 package com.themejoo.domain.batch;
 
+import com.google.api.client.json.Json;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -34,17 +32,23 @@ public class StockCrawlingController {
     private KonexMarketCommand konexMarketCommand;
 
     @GetMapping("/stockMkt")
-    public void getStockList(){
+    public ResponseEntity<String> getStockList(){
         stockMarketCommand.execute();
+
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @GetMapping("/kosdaqMkt")
-    public void getKosdaqList(){
+    public ResponseEntity<String> getKosdaqList(){
         kosdaqMarketCommand.execute();
+
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @GetMapping("/konexMkt")
-    public void getKonexList(){
+    public ResponseEntity<String> getKonexList(){
         konexMarketCommand.execute();
+
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

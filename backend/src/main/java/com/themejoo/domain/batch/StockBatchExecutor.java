@@ -1,5 +1,7 @@
 package com.themejoo.domain.batch;
 
+import com.themejoo.domain.stockinfo.StockInfo;
+import com.themejoo.domain.stockinfo.StockInfoRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -27,7 +29,7 @@ import java.util.Locale;
 @Slf4j
 @AllArgsConstructor
 @Component
-public class BatchExecutor {
+public class StockBatchExecutor {
 
     @Autowired
     private StockInfoRepository stockInfoRepository;
@@ -37,17 +39,24 @@ public class BatchExecutor {
     private HttpHeaders headers;
     private MarketType marketType;
 
-    public BatchExecutor(){
+    public StockBatchExecutor(){
         restTemplate = new RestTemplate();
+        headers = setHeaders();
+    }
+
+    private HttpHeaders setHeaders(){
         headers = new HttpHeaders();
 
-        List<Locale.LanguageRange> langList = Arrays.asList(
-                new Locale.LanguageRange("ko-KR"),
-                new Locale.LanguageRange("ko"),
-                new Locale.LanguageRange("en-US")
-        );
+        List<Locale.LanguageRange> langList =
+                Arrays.asList(
+                        new Locale.LanguageRange("ko-KR")
+                      , new Locale.LanguageRange("ko")
+                      , new Locale.LanguageRange("en-US"));
+
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAcceptLanguage(langList);
+
+        return headers;
     }
 
     public void executeStockMarket(MarketType marketType) {
@@ -59,21 +68,26 @@ public class BatchExecutor {
                 .forEach(v ->{
                     if(v.size()== 10){
                         if(v.iterator().hasNext()) {
-                            stockInfoRepository.save(StockInfo.builder()
-                                    .stockSeq(marketType.getStockSeq())
-                                    .company(v.get(1))
-                                    .stockCode(Integer.parseInt(v.get(2)))
-                                    .businessType(v.get(3))
-                                    .mainProduct(v.get(4))
-                                    .listedDate(v.get(5))
-                                    .settlingMonth(v.get(6))
-                                    .president(v.get(7))
-                                    .homepage(v.get(8))
-                                    .area(v.get(9))
-                                    .build());
+                            saveStockService(v);
                         }
                     }
                 });
+    }
+
+    private void saveStockService(List<String> stockElementList){
+        stockInfoRepository
+                .save(StockInfo.builder()
+                    .stockSeq(marketType.getStockSeq())
+                    .company(stockElementList.get(1))
+                    .stockCode((stockElementList.get(2)))
+                    .businessType(stockElementList.get(3))
+                    .mainProduct(stockElementList.get(4))
+                    .listedDate(stockElementList.get(5))
+                    .settlingMonth(stockElementList.get(6))
+                    .president(stockElementList.get(7))
+                    .homepage(stockElementList.get(8))
+                    .area(stockElementList.get(9))
+                .build());
     }
 
     private List<Element> getStockElementList(){

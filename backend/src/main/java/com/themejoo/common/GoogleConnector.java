@@ -37,11 +37,10 @@ import java.util.List;
 public class GoogleConnector {
     private final String APPLICATION_NAME = "THEME-JOO.COM";
     private final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private final String TOKENS_DIRECTORY_PATH = "tokens";
-
     private final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
-    private final String CREDENTIALS_FILE_PATH = "/client_secret.json";
 
+    private final String TOKENS_DIRECTORY_PATH = "tokens";
+    private final String CREDENTIALS_FILE_PATH = "/client_secret.json";
 
     private Credential getCredential(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
@@ -56,15 +55,7 @@ public class GoogleConnector {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public GoogleCredential getCredential() throws IOException {
-        InputStream in = GoogleConnector.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        GoogleCredential credentials = GoogleCredential.fromStream(in);
-        credentials.refreshToken();
-
-        return credentials;
-    }
-
-    public Sheets getSheetsService() {
+    public Sheets getSheets() {
         Sheets service = null;
         try {
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
