@@ -97,7 +97,7 @@ public class StockCrawlingControllerTest {
                 .forEach(v ->{
                     if(v.size()== 10){
                         stockInfoVO.setCompany(v.get(1));
-                        stockInfoVO.setStockCode(Integer.parseInt(v.get(2)));
+                        stockInfoVO.setStockCode((v.get(2)));
                         stockInfoVO.setBusinessType(v.get(3));
                         stockInfoVO.setMainProduct(v.get(4));
                         stockInfoVO.setListedDate(v.get(5));

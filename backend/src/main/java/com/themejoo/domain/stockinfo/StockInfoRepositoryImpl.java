@@ -45,7 +45,7 @@ public class StockInfoRepositoryImpl implements StockInfoRepositoryCustom {
         return stockInfo.stockSeq.eq(stockSeq);
     }
 
-    private BooleanExpression eqStockCode(int stockCode) {
+    private BooleanExpression eqStockCode(String stockCode) {
         if (StringUtils.isEmpty(stockCode)) {
             return null;
         }

@@ -79,7 +79,7 @@ public class StockBatchExecutor {
                 .save(StockInfo.builder()
                     .stockSeq(marketType.getStockSeq())
                     .company(stockElementList.get(1))
-                    .stockCode(Integer.parseInt(stockElementList.get(2)))
+                    .stockCode((stockElementList.get(2)))
                     .businessType(stockElementList.get(3))
                     .mainProduct(stockElementList.get(4))
                     .listedDate(stockElementList.get(5))

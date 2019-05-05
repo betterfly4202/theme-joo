@@ -8,7 +8,6 @@ spring:
     open-in-view: false
 
 google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
-google.api.key: AIzaSyASrTrQc66bT92i9cQNzsjbB80ckq6gYTY
 
 ---
 spring:

@@ -4,6 +4,8 @@ import com.themejoo.common.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Created by betterfly
@@ -22,7 +24,7 @@ public class StockInfo extends BaseTimeEntity {
 
     private int stockSeq;
     private String company;
-    private int stockCode;
+    private String stockCode;
     private String businessType;
     private String mainProduct;
     private String listedDate;
@@ -32,11 +34,11 @@ public class StockInfo extends BaseTimeEntity {
     private String area;
 
     @Builder
-    public StockInfo(int stockSeq, String company, int stockCode, String businessType, String mainProduct,
+    public StockInfo(int stockSeq, String company, String stockCode, String businessType, String mainProduct,
                      String listedDate, String settlingMonth, String president, String homepage, String area){
         this.stockSeq = stockSeq;
         this.company = company;
-        this.stockCode = stockCode;
+        this.stockCode = adjustStringLength(stockCode);
         this.businessType = businessType;
         this.mainProduct = mainProduct;
         this.listedDate = listedDate;
@@ -44,5 +46,16 @@ public class StockInfo extends BaseTimeEntity {
         this.president = president;
         this.homepage = homepage;
         this.area = area;
+    }
+
+    private final int STOCK_CODE_LENGTH = 6;
+    private String adjustStringLength(String value){
+        if (value.length() < STOCK_CODE_LENGTH){
+            for (int i=0; i <= STOCK_CODE_LENGTH-value.length(); i++){
+                value = "0" + value;
+            }
+        }
+
+        return value;
     }
 }

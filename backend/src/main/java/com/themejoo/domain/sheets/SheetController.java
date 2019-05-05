@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
-@Api(value = "v1/sheet", description = "sheet api")
+//@Api(value = "v1/sheet", description = "sheet api")
 public class SheetController {
     private SheetServiceImpl sheetMaker;
 
@@ -30,8 +30,18 @@ public class SheetController {
     @GetMapping("/sheet")
     public void getSheet(){
         try{
-            ValueRange list = sheetMaker.readSheets("A1:L79");
-            System.out.println(list);
+//            ValueRange list = sheetMaker.readSheets("A1:L79");
+//            System.out.println(list);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("/make/sheet")
+    public void getMakeSheet(){
+        try{
+            sheetMaker.makeSpreadSheet("시트만들기");
+
         }catch (Exception e){
             e.printStackTrace();
         }

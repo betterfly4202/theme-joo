@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import static org.junit.Assert.*;
 
@@ -24,4 +25,16 @@ public class SheetServiceImplTest {
         sheetService.makeSpreadSheet("테스트_시트");
     }
 
+    @Test
+    public void 시트_값_넣기() throws IOException {
+        String spreadsheetId = "1xkftjH3E3bsZal4d2tHoq9czJD-HxAVeGHK7lvwBR9Q";
+        String range = "A1";
+
+        sheetService.sheetUpdates(spreadsheetId, range);
+    }
+
+    @Test
+    public void batchUpdate_Test() throws IOException {
+        sheetService.batchUpdate();
+    }
 }
