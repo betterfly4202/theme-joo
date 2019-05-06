@@ -3,7 +3,6 @@ package com.themejoo.domain.sheets;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -17,10 +16,10 @@ public class FinanceCommandFormatTest {
     private String baseSheetFormat = "=GOOGLEFINANCE(\"%s\", \"%s\", %s, %d)";
 
 
-    private FinanceCommandFormat financeCommandFormat;
+    private FinanceCommandMaker financeCommandMaker;
     @Before
     public void setUp(){
-        financeCommandFormat= FinanceCommandFormat.builder()
+        financeCommandMaker = FinanceCommandMaker.builder()
                 .stockSubject("KRX:306200")
                 .attributes("price")
                 .startDate("TODAY()-30")
@@ -29,10 +28,10 @@ public class FinanceCommandFormatTest {
     }
 
     @Test
-    public void 시트_포맷_메이커(){
+    public void 동적_포매터_만들기(){
         String getPrice = String.format(baseSheetFormat,"KRX:306200", "price", "TODAY()-30", 7);
 
-        String getPriace2 = financeCommandFormat.getCommand();
+        String getPriace2 = financeCommandMaker.getCommand();
 
         assertTrue(getPrice.equals(getPriace2));
     }
