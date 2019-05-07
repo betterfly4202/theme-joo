@@ -50,6 +50,7 @@ public class FinanceCommandMaker {
         }
 
         appendAttributes(")");
+
         return baseFormat.toString();
     }
 
