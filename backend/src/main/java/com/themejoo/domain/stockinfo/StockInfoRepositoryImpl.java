@@ -21,28 +21,12 @@ public class StockInfoRepositoryImpl implements StockInfoRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<StockInfo> findByStockInfoSeq(Integer stockSeq) {
+    public List<StockInfo> findByStockInfoQueryAdvance(String stockCode, String company) {
         return queryFactory
                 .selectFrom(stockInfo)
-                .where(stockInfo.stockSeq.eq(stockSeq))
+                .where(eqStockCode(stockCode)
+                      ,likeCompany(company))
                 .fetch();
-    }
-
-//    public StockInfo findByStockInfoForDynamicQuery(StockInfo stockInfo) {
-//        return queryFactory
-//                .selectFrom(academy)
-//                .where(eqStockSeq(stockInfo),
-//                        eqAddress(address),
-//                        eqPhoneNumber(phoneNumber))
-//                .fetch();
-//    }
-
-
-    private BooleanExpression eqStockSeq(int stockSeq) {
-        if (StringUtils.isEmpty(stockSeq)) {
-            return null;
-        }
-        return stockInfo.stockSeq.eq(stockSeq);
     }
 
     private BooleanExpression eqStockCode(String stockCode) {

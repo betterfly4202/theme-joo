@@ -6,10 +6,7 @@ import com.themejoo.domain.stockinfo.StockInfoRepositoryImpl;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,10 +44,10 @@ public class SheetController {
         }
     }
 
-    @GetMapping("/stock")
-    public List<StockInfo> getStockListFromSeq(
-            @RequestParam Integer stockSeq){
+    @PostMapping("/stockinfo")
+    public List<StockInfo> getStockListDetail(
+            @RequestBody StockInfo stockInfo){
 
-        return stockInfoService.findByStockInfoSeq(stockSeq);
+        return stockInfoService.findByStockInfoQueryAdvance(stockInfo.getStockCode(), stockInfo.getCompany());
     }
 }

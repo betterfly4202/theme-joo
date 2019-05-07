@@ -70,7 +70,6 @@ public class StockCrawlingControllerTest {
         doc.body();
 
         //then
-//        System.out.println(responseBody);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         Assert.assertTrue(responseBody.contains("td"));
 
