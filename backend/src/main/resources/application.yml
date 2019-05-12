@@ -7,7 +7,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
 
-google.sheet.id: 1QRZM7G5VN39ftI16dw033zotxNaJwkiQu3aQpsJUK2A
+google.sheet.id: 1xkftjH3E3bsZal4d2tHoq9czJD-HxAVeGHK7lvwBR9Q
 
 ---
 spring:

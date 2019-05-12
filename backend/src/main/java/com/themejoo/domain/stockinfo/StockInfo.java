@@ -48,8 +48,10 @@ public class StockInfo extends BaseTimeEntity {
         this.area = area;
     }
 
-    private final int STOCK_CODE_LENGTH = 6;
     private String adjustStringLength(String value){
+
+        final int STOCK_CODE_LENGTH = 6;
+
         if (value.length() < STOCK_CODE_LENGTH){
             for (int i=0; i <= STOCK_CODE_LENGTH-value.length(); i++){
                 value = "0" + value;

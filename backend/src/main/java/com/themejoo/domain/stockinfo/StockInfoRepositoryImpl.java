@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
-
 import static com.themejoo.domain.stockinfo.QStockInfo.stockInfo;
 
 /**
@@ -21,12 +19,12 @@ public class StockInfoRepositoryImpl implements StockInfoRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<StockInfo> findByStockInfoQueryAdvance(String stockCode, String company) {
+    public StockInfo findByStockInfoQueryAdvance(String stockCode, String company) {
         return queryFactory
                 .selectFrom(stockInfo)
                 .where(eqStockCode(stockCode)
                       ,likeCompany(company))
-                .fetch();
+                .fetchOne();
     }
 
     private BooleanExpression eqStockCode(String stockCode) {

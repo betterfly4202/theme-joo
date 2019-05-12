@@ -21,7 +21,7 @@ public class StockInfoTest {
     }
 
     @Test
-    public void Stock_Code_길이(){
+    public void stock_Code_길이(){
         StockInfo info = StockInfo.builder()
                  .stockCode("4000")
                  .build();

@@ -1,5 +1,6 @@
 package com.themejoo.domain.sheets;
 
+import com.themejoo.domain.stockinfo.StockInfo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,5 +35,16 @@ public class FinanceCommandFormatTest {
         String getPriace2 = financeCommandMaker.getCommand();
 
         assertTrue(getPrice.equals(getPriace2));
+    }
+
+    @Test
+    public void stockSubject_생성기(){
+        StockInfo stockInfo = new StockInfo();
+        stockInfo.setStockSeq(1);
+        stockInfo.setStockCode("000888");
+
+        String subject = financeCommandMaker.parseToStockSubject(stockInfo);
+
+        assertThat(subject, is("KRX:000888"));
     }
 }

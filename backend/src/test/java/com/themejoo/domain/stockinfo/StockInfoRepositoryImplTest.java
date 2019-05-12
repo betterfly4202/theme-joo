@@ -53,15 +53,11 @@ public class StockInfoRepositoryImplTest {
             .build());
 
         //when
-        List<StockInfo> stockInfo = stockInfoRepository.findByStockInfoQueryAdvance(stockCode, null);
-
-        List<StockInfo> stockInfo2 = stockInfoRepository.findByStockInfoQueryAdvance(null, company);
+        StockInfo stockInfo = stockInfoRepository.findByStockInfoQueryAdvance(stockCode, null);
+        StockInfo stockInfo2 = stockInfoRepository.findByStockInfoQueryAdvance(null, company);
 
         //then
-        assertThat(stockInfo.size(), is(1));
-        assertThat(stockInfo.get(0).getCompany(), is(company));
-
-        assertThat(stockInfo2.size(), is(1));
-        assertThat(stockInfo2.get(0).getStockCode(), is(stockCode));
+        assertThat(stockInfo.getCompany(), is(company));
+        assertThat(stockInfo2.getStockCode(), is(stockCode));
     }
 }
