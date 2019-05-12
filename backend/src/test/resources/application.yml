@@ -7,6 +7,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
+google.sheet.id: 1xkftjH3E3bsZal4d2tHoq9czJD-HxAVeGHK7lvwBR9Q
+
 ---
 spring:
   profiles: local

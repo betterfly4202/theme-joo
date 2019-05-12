@@ -1,24 +1,18 @@
 package com.themejoo.domain.sheets;
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
 import com.themejoo.common.CommonUtills;
 import com.themejoo.common.GoogleConnector;
 import com.themejoo.common.SheetsConstants;
+import com.themejoo.domain.stockinfo.StockInfo;
+import com.themejoo.domain.stockinfo.StockInfoRepository;
+import com.themejoo.domain.stockinfo.StockInfoRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.portable.ValueInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +28,9 @@ public class SheetServiceImpl{
 
     @Autowired
     private GoogleConnector googleConnector;
+
+    @Autowired
+    private StockInfoRepositoryImpl stockInfoService;
 
     private Sheets sheetsService;
 
@@ -59,73 +56,85 @@ public class SheetServiceImpl{
         log.info("Spreadsheet ID: " + spreadsheet.getSpreadsheetId());
     }
 
-    public ValueRange readSheets(String sheetId, String range) throws IOException {
+    public List<List<Object>> readSheetValues(String sheetId, String range) throws IOException {
         ValueRange sheetValues =
                 sheetsService.spreadsheets()
                              .values()
                              .get(sheetId, range)
                              .execute();
 
-        return sheetValues;
+        return sheetValues.getValues();
     }
 
-    public void sheetUpdates(String sheetId, String range) throws IOException {
+    public List<List<Object>> readSheetValuess(String sheetId, String range) throws IOException {
+        Sheets.Spreadsheets.Get request = sheetsService.spreadsheets().get(sheetId);
+        request.setRanges(Arrays.asList("A1:B5"));
+        request.setIncludeGridData(true);
+
+        Spreadsheet response = request.execute();
+
+        return null;
+    }
+
+    public void aa(String sheetId, String range) throws IOException {
+        Sheets.Spreadsheets.Values.BatchGet request =
+                sheetsService.spreadsheets().values().batchGet(sheetId);
+        request.setRanges(Arrays.asList(range));
+        request.setValueRenderOption("FORMATTED_VALUE");
+
+        BatchGetValuesResponse response = request.execute();
+        response.getValueRanges();
+    }
+
+    public void sheetUpdates(String spreadCommand) throws IOException {
         Sheets sheetsService = googleConnector.getSheets();
         Sheets.Spreadsheets.Values.Update request =
-                sheetsService.spreadsheets().values().update(sheetId, range, setSpreadValues());
+                sheetsService.spreadsheets()
+                             .values()
+                             .update(sheetId, "A1:B9", setSpreadCommand(spreadCommand));
+
         request.setValueInputOption(SheetsConstants.VALUE_INPUT_OPTIONS);
 
         UpdateValuesResponse response = request.execute();
         response.getUpdatedRange();
         response.getUpdatedData();
+        response.getUpdatedRows();
+        response.values();
 
         System.out.println(response);
     }
 
-    public void batchUpdate() throws IOException {
-        // The new values to apply to the spreadsheet.
-        String spreadsheetId = "1xkftjH3E3bsZal4d2tHoq9czJD-HxAVeGHK7lvwBR9Q";
-        List<ValueRange> data = new ArrayList<>(); // TODO: Update placeholder value.
-
-
+    private ValueRange setSpreadCommand(String spreadCommand){
         List<List<Object>> list = new ArrayList<>();
         List<Object> subList = new ArrayList<>();
-        subList.add("=googlefinance(\"KRX:306200\", \"price\", TODAY()-30, TODAY(), 7)");
-
+        subList.add(spreadCommand);
         list.add(subList);
 
-        ValueRange valueRange = new ValueRange();
-        valueRange.setRange("A1");
-        valueRange.setMajorDimension(SheetsConstants.MAJOR_DIMENSION);
-        valueRange.setValues(list);
-        data.add(valueRange);
-
-        // TODO: Assign values to desired fields of `requestBody`:
-        BatchUpdateValuesRequest requestBody = new BatchUpdateValuesRequest();
-        requestBody.setValueInputOption(SheetsConstants.VALUE_INPUT_OPTIONS);
-        requestBody.setData(data);
-
-        Sheets sheetsService = googleConnector.getSheets();
-        Sheets.Spreadsheets.Values.BatchUpdate request =
-                sheetsService.spreadsheets().values().batchUpdate(spreadsheetId, requestBody);
-
-        BatchUpdateValuesResponse response = request.execute();
-
-        // TODO: Change code below to process the `response` object:
-        System.out.println(response);
+        return new ValueRange().setMajorDimension(SheetsConstants.MAJOR_DIMENSION)
+                               .setValues(list);
     }
 
-    private ValueRange setSpreadValues(){
-        ValueRange requestBody = new ValueRange();
-        List<List<Object>> list = new ArrayList<>();
-        List<Object> subList = new ArrayList<>();
-        subList.add("=googlefinance(\"KRX:306200\", \"price\", TODAY()-30, TODAY(), 7)");
+    private String makeSpreadCommand(StockInfo stockInfo){
+        final StockInfo dto = stockInfoService.findByStockInfoQueryAdvance(stockInfo.getStockCode(), stockInfo.getCompany());
 
-        list.add(subList);
+        return FinanceCommandMaker.builder()
+                   .stockSubject(new FinanceCommandMaker().parseToStockSubject(dto))
+                   .attributes("price")
+                   .startDate("TODAY()-30")
+                   .endDate("7")
+                   .build()
+            .getCommand();
+    }
 
-        requestBody.setMajorDimension(SheetsConstants.MAJOR_DIMENSION)
-                .setValues(list);
+    public List<List<Object>> getFinanceDetail(StockInfo stockInfo){
+        List<List<Object>> sheetValues = null;
+        try {
+            sheetUpdates(makeSpreadCommand(stockInfo));
+            sheetValues = readSheetValuess(sheetId, "A1:B5");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return requestBody;
+        return sheetValues;
     }
 }

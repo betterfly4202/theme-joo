@@ -7,5 +7,5 @@ import java.util.List;
  * Date : 2019.04.24
  */
 public interface StockInfoRepositoryCustom {
-    List<StockInfo> findByStockInfoQueryAdvance(String stockCode, String company);
+    StockInfo findByStockInfoQueryAdvance(String stockCode, String company);
 }

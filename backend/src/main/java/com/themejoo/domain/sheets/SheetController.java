@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api")
 //@Api(value = "v1/sheet", description = "sheet api")
 public class SheetController {
-    private SheetServiceImpl sheetMaker;
+    private SheetServiceImpl sheetService;
 
     @Autowired
     private StockInfoRepositoryImpl stockInfoService;
@@ -37,7 +37,7 @@ public class SheetController {
     @GetMapping("/make/sheet")
     public void getMakeSheet(){
         try{
-            sheetMaker.makeSpreadSheet("시트만들기");
+            sheetService.makeSpreadSheet("시트만들기");
 
         }catch (Exception e){
             e.printStackTrace();
@@ -45,9 +45,9 @@ public class SheetController {
     }
 
     @PostMapping("/stockinfo")
-    public List<StockInfo> getStockListDetail(
+    public StockInfo getStockListDetail(
             @RequestBody StockInfo stockInfo){
-
-        return stockInfoService.findByStockInfoQueryAdvance(stockInfo.getStockCode(), stockInfo.getCompany());
+        sheetService.getFinanceDetail(stockInfo);
+        return null;
     }
 }

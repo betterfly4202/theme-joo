@@ -1,5 +1,6 @@
 package com.themejoo.domain.sheets;
 
+import com.themejoo.domain.stockinfo.StockInfo;
 import lombok.Builder;
 
 /**
@@ -19,6 +20,9 @@ public class FinanceCommandMaker {
     private String endDate;
     private Integer interval;
 
+    public FinanceCommandMaker(){
+
+    }
     @Builder
     public FinanceCommandMaker(String stockSubject, String attributes, String startDate, String endDate, Integer interval) {
         this.stockSubject = stockSubject;
@@ -60,5 +64,19 @@ public class FinanceCommandMaker {
 
     public String getCommand(){
         return String.format(makeBaseFormat(), stockSubject, attributes, startDate, endDate);
+    }
+
+    public String parseToStockSubject(StockInfo stockInfo){
+        String stockSubject = null;
+        switch (stockInfo.getStockSeq()){
+            case 1 : stockSubject = "KRX:";
+                break;
+            case 2 : stockSubject = "KOSDAQ:";
+                break;
+            default: stockSubject = "";
+                break;
+        }
+
+        return stockSubject + stockInfo.getStockCode();
     }
 }
