@@ -47,7 +47,7 @@ public class SheetServiceImplTest {
 //        sheetService.makeSpreadSheet("테스트_시트");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void 시트_값_넣기() throws IOException {
         sheetService.sheetUpdates(null);
     }
