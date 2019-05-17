@@ -44,7 +44,7 @@ public class SheetServiceImplTest {
 
     @Test
     public void 시트_만들기() throws IOException {
-//        sheetService.makeSpreadSheet("테스트_시트");
+        sheetService.makeSpreadSheet("테스트_시트");
     }
 
     @Test
