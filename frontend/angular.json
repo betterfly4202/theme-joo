@@ -31,7 +31,7 @@
               "src/styles.theme.scss"
             ],
             "scripts": [
-              "../node_modules/chart.js/dist/Chart.min.js"
+              "./node_modules/chart.js/dist/Chart.min.js"
             ],
             "es5BrowserSupport": true
           },
