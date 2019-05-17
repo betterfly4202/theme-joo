@@ -4,7 +4,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
-import {MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 import {Global} from './app.global.service';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -19,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     LayoutModule,
     MatToolbarModule,
+    MatTabsModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,

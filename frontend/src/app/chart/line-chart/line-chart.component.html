@@ -1,9 +1,9 @@
-<div>
-  <x-chartist
-    *ngIf="!loading"
-    [type]="type"
-    [data]="data"
-    [options]="options"
-    [events]="events"
-  ></x-chartist>
+<div [ngStyle]="{'width.px': width, 'height.px': height}">
+  <canvas baseChart
+          [datasets]="getData()"
+          [labels]="getLabels()"
+          [options]="lineChartOptions"
+          [legend]="false"
+          [chartType]="'line'">
+  </canvas>
 </div>

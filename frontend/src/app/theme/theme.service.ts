@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ITheme, Tag, Theme} from './theme.model';
 import {Observable} from 'rxjs/index';
+import _ from 'partial-js';
 
 @Injectable()
 export class ThemeService {
@@ -44,15 +45,18 @@ export class ThemeService {
 
   // TODO 임시코드
   getDummyRandomData(): number[] {
-    const result: number[] = [];
 
-    let seed: number = Math.floor(Math.random() * 100000) + 5000;
+    let seed: number = _.random(5000, 100000);
 
-    while (result.length < 100) {
-      seed += Math.floor(Math.random() * seed * 0.06) - seed * 0.03;
-      result.push(seed);
-    }
+    const tick = value => {
+      const range = seed * 0.01;
+      seed += Math.floor(_.random(range * -1, range));
+      return seed;
+    };
 
-    return result;
+    return _.go(
+      _.range(50),
+      _.map(tick)
+    );
   }
 }
