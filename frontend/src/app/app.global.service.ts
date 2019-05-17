@@ -29,7 +29,7 @@ export class ColumnBreakpoint {
 @Injectable()
 export class Global {
 
-  public static CARD_WIDTH = 400;
+  public static CARD_WIDTH = 375;
 
   columnBreakpoint: ColumnBreakpoint;
   columnCount: number;

@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import {ChartistModule} from 'ng-chartist';
 import {LineChartComponent} from './line-chart/line-chart.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import {LineChartComponent} from './line-chart/line-chart.component';
   ],
   imports: [
     CommonModule,
-    ChartistModule
+    ChartsModule
   ]
 })
-export class ChartModule { }
+export class ChartModule {
+}

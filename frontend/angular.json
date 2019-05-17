@@ -27,11 +27,12 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/chartist/dist/chartist.css",
               "src/styles.scss",
               "src/styles.theme.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "../node_modules/chart.js/dist/Chart.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
