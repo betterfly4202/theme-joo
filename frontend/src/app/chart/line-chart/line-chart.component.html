@@ -1,0 +1,9 @@
+<div [ngStyle]="{'width.px': width, 'height.px': height}">
+  <canvas baseChart
+          [datasets]="getData()"
+          [labels]="getLabels()"
+          [options]="lineChartOptions"
+          [legend]="false"
+          [chartType]="'line'">
+  </canvas>
+</div>

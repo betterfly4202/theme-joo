@@ -1,0 +1,28 @@
+.theme-card {
+  float: left;
+  padding: 24px;
+  margin: 8px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.5);
+  -moz-box-shadow: 0 0 2px 0 rgba(0,0,0,.5);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.5);
+  position: relative;
+  background: transparent;
+
+  .avatar {
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    &.mat-card-avatar {
+      -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+      -moz-box-shadow: 0 0 5px rgba(0,0,0,.5);
+      box-shadow: 0 0 5px rgba(0,0,0,.5);
+    }
+  }
+
+  &.background{
+    background-color: rgba(0,0,0,.03);
+  }
+}

@@ -5,35 +5,37 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
 
-# local 환경
+google.sheet.id: 1xkftjH3E3bsZal4d2tHoq9czJD-HxAVeGHK7lvwBR9Q
+
 ---
 spring:
   profiles: local
-  datasource:
-    data: classpath:data-h2.sql # 시작할때 실행시킬 script
+#  datasource:
+#    data: classpath:data-h2.sql # 시작할때 실행시킬 script
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create-drop
   h2:
     console:
       enabled: true
 
-# 운영 환경
+# dev 개발 환경
 ---
 spring.profiles: dev
 spring:
   datasource:
     hikari:
       driver-class-name: com.mysql.jdbc.Driver
-      jdbc-url: jdbc:mysql://betterfly-sql.creacra6qvrv.ap-northeast-2.rds.amazonaws.com:3306/themejoo_dev?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://themejoo-webservice.creacra6qvrv.ap-northeast-2.rds.amazonaws.com:3306/themejoo_dev?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
       username: betterfly
       password: betterfly
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: update
 
-server:
-  port: 8081
-
+# prd 배포 환경
 ---
 spring.profiles: prd
 spring.profiles.include: prd-db

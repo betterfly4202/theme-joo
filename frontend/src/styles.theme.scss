@@ -1,0 +1,80 @@
+@import '../node_modules/@angular/material/theming';
+
+/*
+  theme-joo main theme
+ */
+$theme-joo-primary: mat-palette($mat-blue-gray);
+$theme-joo-accent: mat-palette($mat-pink, 500, 900, A100);
+$theme-joo-warn: mat-palette($mat-deep-orange);
+
+$theme-joo: mat-light-theme($theme-joo-primary, $theme-joo-accent, $theme-joo-warn);
+
+@include angular-material-theme($theme-joo);
+
+
+/*
+  theme-joo main typogrphy
+ */
+$theme-joo-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $display-4: mat-typography-level(48px, 56px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+@include mat-core($theme-joo-typography);
+
+
+/*
+  theme-joo icons
+ */
+$icon-container-size: 18px;
+$icon-size: 18px;
+.mat-icon-button {
+  width: $icon-container-size;
+  height: $icon-container-size;
+  line-height: $icon-size;
+  .mat-icon, .mat-icon-button i {
+    line-height: $icon-size;
+  }
+  .mat-icon {
+    width: $icon-size;
+    height: $icon-size;
+  }
+  .material-icons {
+    font-size: $icon-size;
+  }
+}
+
+.mat-icon-button.x2 {
+  width: $icon-container-size*2;
+  height: $icon-container-size*2;
+  line-height: $icon-size*2;
+  .mat-icon, .mat-icon-button i {
+    line-height: $icon-size*2;
+  }
+  .mat-icon {
+    width: $icon-size*2;
+    height: $icon-size*2;
+  }
+  .material-icons {
+    font-size: $icon-size*2;
+  }
+}
+
+.mat-icon-button.x3 {
+  width: $icon-container-size*3;
+  height: $icon-container-size*3;
+  line-height: $icon-size*3;
+  .mat-icon, .mat-icon-button i {
+    line-height: $icon-size*3;
+  }
+  .mat-icon {
+    width: $icon-size*3;
+    height: $icon-size*3;
+  }
+  .material-icons {
+    font-size: $icon-size*3;
+  }
+}
+
+

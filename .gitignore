@@ -12,6 +12,7 @@ target/*
 ### Backend ###
 /backend/target/
 /backend/src/main/resources/static/
+/backend/tokens/
 
 ### Frontend ###
 /frontend/node/

@@ -1,0 +1,55 @@
+
+.sidenav-container {
+  height: 100%;
+
+  .sidenav {
+    width: 200px;
+
+    .active {
+      font-weight: bolder;
+      background-color: rgba(0,0,0,.02);
+    }
+  }
+
+  .mat-toolbar {
+    background: #fff;
+
+    &.mat-primary {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .mat-toolbar-row {
+      padding-left: 18px;
+      height: 64px;
+      background: #fff;
+      -webkit-box-shadow: inset 0 -10px 10px -15px rgba(0,0,0,.3);
+      -moz-box-shadow: inset 0 -10px 10px -15px rgba(0,0,0,.3);
+      box-shadow: inset 0 -10px 10px -15px rgba(0,0,0,.3);
+
+      .mat-tab-nav-bar {
+        margin-left: 32px;
+      }
+    }
+
+    h1 {
+      font: 700 24px/28px Roboto, monospace;
+      margin-left: 18px;
+    }
+  }
+
+  .content {
+    padding-bottom: 108px;
+  }
+
+  footer {
+    height: 240px;
+    width: 100%;
+    background-color: rgba(0,0,0,.02);
+    -webkit-box-shadow: inset 0 0px 20px -15px rgba(0,0,0,.3);
+    -moz-box-shadow: inset 0 0px 20px -15px rgba(0,0,0,.3);
+    box-shadow: inset 0 0px 20px -15px rgba(0,0,0,.3);
+  }
+}
+
