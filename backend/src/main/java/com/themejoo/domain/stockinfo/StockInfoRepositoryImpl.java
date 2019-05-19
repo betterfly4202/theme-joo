@@ -19,19 +19,19 @@ public class StockInfoRepositoryImpl implements StockInfoRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public StockInfo findByStockInfoQueryAdvance(String stockCode, String company) {
+    public StockInfo findByStockInfoQueryAdvance(String code, String company) {
         return queryFactory
                 .selectFrom(stockInfo)
-                .where(eqStockCode(stockCode)
+                .where(eqCode(code)
                       ,likeCompany(company))
                 .fetchOne();
     }
 
-    private BooleanExpression eqStockCode(String stockCode) {
-        if (StringUtils.isEmpty(stockCode)) {
+    private BooleanExpression eqCode(String code) {
+        if (StringUtils.isEmpty(code)) {
             return null;
         }
-        return stockInfo.stockCode.eq(stockCode);
+        return stockInfo.code.eq(code);
     }
 
     private BooleanExpression likeCompany(String company) {

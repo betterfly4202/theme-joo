@@ -77,9 +77,9 @@ public class StockBatchExecutor {
     private void saveStockService(List<String> stockElementList){
         stockInfoRepository
                 .save(StockInfo.builder()
-                    .stockSeq(marketType.getStockSeq())
+                    .type(marketType.getType())
                     .company(stockElementList.get(1))
-                    .stockCode((stockElementList.get(2)))
+                    .code((stockElementList.get(2)))
                     .businessType(stockElementList.get(3))
                     .mainProduct(stockElementList.get(4))
                     .listedDate(stockElementList.get(5))

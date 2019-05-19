@@ -68,7 +68,7 @@ public class FinanceCommandMaker {
 
     public String parseToStockSubject(StockInfo stockInfo){
         String stockSubject = null;
-        switch (stockInfo.getStockSeq()){
+        switch (stockInfo.getType()){
             case 1 : stockSubject = "KRX:";
                 break;
             case 2 : stockSubject = "KOSDAQ:";
@@ -77,6 +77,6 @@ public class FinanceCommandMaker {
                 break;
         }
 
-        return stockSubject + stockInfo.getStockCode();
+        return stockSubject + stockInfo.getCode();
     }
 }

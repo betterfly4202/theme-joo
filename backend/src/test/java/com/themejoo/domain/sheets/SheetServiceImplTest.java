@@ -55,9 +55,8 @@ public class SheetServiceImplTest {
     @Test
     public void 시트_데이터_읽기() {
         repository.save(StockInfo.builder()
-                .stockSeq(1)
                 .company("111110")
-                .stockCode("111110")
+                .code("111110")
                 .businessType("테스트_타입")
                 .mainProduct("테스트_상품")
                 .listedDate("2019-05-05")
@@ -67,7 +66,7 @@ public class SheetServiceImplTest {
                 .area("서울 광진구")
                 .build());
 
-        sheetService.getFinanceDetail(StockInfo.builder().stockCode("111110").build());
+        sheetService.getFinanceDetail(StockInfo.builder().code("111110").build());
     }
 
     @Test

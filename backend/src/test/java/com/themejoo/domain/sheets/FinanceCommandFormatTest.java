@@ -40,8 +40,8 @@ public class FinanceCommandFormatTest {
     @Test
     public void stockSubject_생성기(){
         StockInfo stockInfo = new StockInfo();
-        stockInfo.setStockSeq(1);
-        stockInfo.setStockCode("000888");
+        stockInfo.setType(1);
+        stockInfo.setCode("000888");
 
         String subject = financeCommandMaker.parseToStockSubject(stockInfo);
 

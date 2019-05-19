@@ -11,20 +11,19 @@ import java.util.stream.Stream;
  * Created by betterfly
  * Date : 2019.04.24
  */
-
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 @Entity
 @Data
-@Table(name = "tb_stock_info")
+@Table(name = "stock")
 public class StockInfo extends BaseTimeEntity {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long stockId;
 
-    private int stockSeq;
+    private int type;
+    private String code;
     private String company;
-    private String stockCode;
     private String businessType;
     private String mainProduct;
     private String listedDate;
@@ -34,11 +33,11 @@ public class StockInfo extends BaseTimeEntity {
     private String area;
 
     @Builder
-    public StockInfo(int stockSeq, String company, String stockCode, String businessType, String mainProduct,
+    public StockInfo(int type, String company, String code, String businessType, String mainProduct,
                      String listedDate, String settlingMonth, String president, String homepage, String area){
-        this.stockSeq = stockSeq;
+        this.type = type;
         this.company = company;
-        this.stockCode = adjustStringLength(stockCode);
+        this.code = adjustStringLength(code);
         this.businessType = businessType;
         this.mainProduct = mainProduct;
         this.listedDate = listedDate;

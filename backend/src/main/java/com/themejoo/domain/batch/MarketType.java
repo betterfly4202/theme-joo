@@ -10,16 +10,16 @@ public enum MarketType {
     KONEX_MARKET(3, "konexMkt")
     ;
 
-    private int stockSeq;
+    private int type;
     private String stockName;
 
-    MarketType(int stockSeq, String stockName){
-        this.stockSeq = stockSeq;
+    MarketType(int type, String stockName){
+        this.type = type;
         this.stockName = stockName;
     }
 
-    public int getStockSeq() {
-        return stockSeq;
+    public int getType() {
+        return type;
     }
 
     public String getStockName() {

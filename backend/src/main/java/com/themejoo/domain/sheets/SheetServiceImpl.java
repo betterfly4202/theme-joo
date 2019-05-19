@@ -5,7 +5,6 @@ import com.themejoo.common.CommonUtills;
 import com.themejoo.common.GoogleConnector;
 import com.themejoo.common.SheetsConstants;
 import com.themejoo.domain.stockinfo.StockInfo;
-import com.themejoo.domain.stockinfo.StockInfoRepository;
 import com.themejoo.domain.stockinfo.StockInfoRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +114,7 @@ public class SheetServiceImpl{
     }
 
     private String makeSpreadCommand(StockInfo stockInfo){
-        final StockInfo dto = stockInfoService.findByStockInfoQueryAdvance(stockInfo.getStockCode(), stockInfo.getCompany());
+        final StockInfo dto = stockInfoService.findByStockInfoQueryAdvance(stockInfo.getCode(), stockInfo.getCompany());
 
         return FinanceCommandMaker.builder()
                    .stockSubject(new FinanceCommandMaker().parseToStockSubject(dto))

@@ -40,9 +40,8 @@ public class StockInfoRepositoryImplTest {
         String company = "위메프";
 
         repository.save(StockInfo.builder()
-                .stockSeq(999)
                 .company("위메프")
-                .stockCode("00999")
+                .code("00999")
                 .businessType("테스트_타입")
                 .mainProduct("테스트_상품")
                 .listedDate("2019-05-05")
@@ -58,6 +57,6 @@ public class StockInfoRepositoryImplTest {
 
         //then
         assertThat(stockInfo.getCompany(), is(company));
-        assertThat(stockInfo2.getStockCode(), is(stockCode));
+        assertThat(stockInfo2.getCode(), is(stockCode));
     }
 }

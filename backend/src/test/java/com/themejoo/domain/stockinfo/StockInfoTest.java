@@ -23,10 +23,10 @@ public class StockInfoTest {
     @Test
     public void stock_Code_길이(){
         StockInfo info = StockInfo.builder()
-                 .stockCode("4000")
+                 .code("4000")
                  .build();
 
-        String stockCode = info.getStockCode();
+        String stockCode = info.getCode();
 
         assertThat(stockCode, is("004000"));
     }
